@@ -93,3 +93,36 @@ body {
 .option-button:hover {
     background-color: #ddd;
 }
+
+/* إضافة قواعد لجعل التصميم متجاوبًا مع الشاشات الصغيرة */
+@media (max-width: 480px) {
+    .calculator {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .calculator h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .calculator input {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    .calculator button {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .calculator .result {
+        font-size: 20px;
+    }
+
+    .option-button {
+        padding: 8px 15px;
+        font-size: 14px;
+        margin: 0 3px;
+    }
+}
