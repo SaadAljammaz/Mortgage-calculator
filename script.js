@@ -112,15 +112,11 @@ function calculateMortgage() {
         return;
     }
 
-    // حساب معدل الفائدة الشهري
-    var monthlyInterestRate = interestRate / 100 / 12;
-
-    // إجمالي عدد الدفعات (بالأشهر)
-    var numberOfPayments = years * 12;
+    // حساب معدل الفائدة
+    var yearlyInterestRate = (interestRate / 100 * years) + 1;
 
     // حساب الدفعة الشهرية باستخدام الصيغة القياسية
-    var monthlyPayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments) /
-        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+    var monthlyPayment = principal * yearlyInterestRate / years / 12;
 
     // إضافة الالتزامات الشهرية الأخرى إذا تم إدخالها وفي الوضع المتقدم
     if (document.getElementById('advancedSection').style.display === 'block' && !isNaN(otherObligations) && otherObligations > 0) {
