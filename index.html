@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>حاسبة الرهن العقاري</title>
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="calculator">
+    <h1>حاسبة الرهن العقاري</h1>
+
+    <!-- خيارات أساسي ومتقدم تحت العنوان -->
+    <div class="options">
+        <button id="basicButton" class="option-button active" onclick="showBasic()">أساسي</button>
+        <button id="advancedButton" class="option-button" onclick="showAdvanced()">متقدم</button>
+    </div>
+
+    <!-- قسم المدخلات المشتركة -->
+    <div id="inputSection">
+        <label for="interestRate">معدل الفائدة (% سنوياً):</label>
+        <input type="text" id="interestRate" placeholder="مثال: 3.5">
+
+        <label for="housePrice">سعر المنزل (ريال):</label>
+        <input type="text" id="housePrice" placeholder="مثال: 300,000">
+
+        <label for="years">مدة الرهن (سنوات):</label>
+        <input type="text" id="years" placeholder="مثال: 30">
+
+        <label for="downPayment">الدفعة المقدمة (ريال):</label>
+        <input type="text" id="downPayment" placeholder="اتركه فارغاً إذا لم يكن لديك دفعة مقدمة">
+
+        <!-- قسم المدخلات المتقدمة -->
+        <div id="advancedSection" style="display: none;">
+            <label for="otherObligations">الالتزامات الشهرية الأخرى (ريال):</label>
+            <input type="text" id="otherObligations" placeholder="مثال: 2,000">
+        </div>
+    </div>
+
+    <button onclick="calculateMortgage()">احسب الدفعة الشهرية</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
