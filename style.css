@@ -27,18 +27,23 @@ body {
     margin-bottom: 15px;
 }
 
-.input-group label {
-    display: inline-block;
-    margin-bottom: 5px;
+.input-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.input-row label {
+    flex: 0 0 40%;
+    margin-bottom: 0;
     color: #555;
     font-weight: 700;
     text-align: right;
-    width: 50%;
     box-sizing: border-box;
 }
 
-.input-group input[type="text"] {
-    width: 45%;
+.input-row input[type="text"] {
+    flex: 1;
     padding: 10px 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -46,6 +51,7 @@ body {
     color: #333;
     text-align: right;
     box-sizing: border-box;
+    margin-left: 10px;
 }
 
 .input-group input[type="range"] {
@@ -107,24 +113,19 @@ body {
 
 /* تصميم مستجيب للشاشات الصغيرة */
 @media (max-width: 480px) {
-    .calculator {
-        margin: 20px;
-        padding: 15px;
+    .input-row label {
+        flex: 0 0 35%;
+        font-size: 12px;
+    }
+
+    .input-row input[type="text"] {
+        font-size: 12px;
+        margin-left: 5px;
     }
 
     .calculator h1 {
-        font-size: 24px;
+        font-size: 22px;
         margin-bottom: 15px;
-    }
-
-    .input-group label, .input-group input[type="text"] {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-
-    .input-group input[type="text"] {
-        padding: 8px 10px;
-        font-size: 14px;
     }
 
     .calculator button {
@@ -133,11 +134,11 @@ body {
     }
 
     .calculator .result {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .option-button {
-        padding: 8px 15px;
+        padding: 8px 12px;
         font-size: 14px;
         margin: 0 3px;
     }
