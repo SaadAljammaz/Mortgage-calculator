@@ -27,35 +27,88 @@ body {
     margin-bottom: 20px;
 }
 
-.label-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.input-group label,
+.input-group input[type="text"] {
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.label-input label {
-    flex: 0 0 45%;
+.input-group label {
+    width: 60%;
     color: #555;
     font-weight: 700;
     text-align: right;
     box-sizing: border-box;
 }
 
-.label-input input[type="text"] {
-    flex: 0 0 50%;
+.input-group input[type="text"] {
+    width: 35%;
     padding: 8px 10px;
+    margin-left: 5px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
     color: #333;
-    text-align: left; /* محاذاة النص إلى اليسار */
+    text-align: right;
     box-sizing: border-box;
-    margin-left: 5px;
 }
 
+/* تنسيقات منزلق النطاق */
 .input-group input[type="range"] {
     width: 100%;
     margin-top: 10px;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.input-group input[type="range"]:focus {
+    outline: none;
+}
+
+/* تصميم المسار */
+.input-group input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+.input-group input[type="range"]::-moz-range-track {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+.input-group input[type="range"]::-ms-track {
+    height: 5px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+/* تصميم المقبض */
+.input-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #007BFF;
+    border-radius: 50%;
+    margin-top: -7.5px;
+}
+
+.input-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007BFF;
+    border: none;
+    border-radius: 50%;
+}
+
+.input-group input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007BFF;
+    border: none;
+    border-radius: 50%;
 }
 
 .calculator .result {
@@ -65,116 +118,16 @@ body {
     text-align: center;
 }
 
-.options {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.option-button {
-    background-color: #f0f0f0;
-    border: none;
-    color: #333;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.option-button.active {
-    background-color: #007BFF;
-    color: #fff;
-}
-
-.option-button:hover {
-    background-color: #ddd;
-}
-
-/* تنسيقات منزلقات النطاق */
-input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    background: transparent;
-}
-
-input[type="range"]:focus {
-    outline: none;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-    height: 5px;
-    background: #ddd;
-    border-radius: 5px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 15px;
-    height: 15px;
-    background: #007BFF;
-    border-radius: 50%;
-    margin-top: -5px;
-}
-
-input[type="range"]::-moz-range-track {
-    height: 5px;
-    background: #ddd;
-    border-radius: 5px;
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    background: #007BFF;
-    border-radius: 50%;
-}
-
-input[type="range"]::-ms-track {
-    height: 5px;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-}
-
-input[type="range"]::-ms-fill-lower {
-    background: #ddd;
-    border-radius: 5px;
-}
-
-input[type="range"]::-ms-fill-upper {
-    background: #ddd;
-    border-radius: 5px;
-}
-
-input[type="range"]::-ms-thumb {
-    width: 15px;
-    height: 15px;
-    background: #007BFF;
-    border-radius: 50%;
-}
-
-/* تصميم مستجيب للشاشات الصغيرة */
+/* تعديل استعلام الوسائط */
 @media (max-width: 480px) {
-    .label-input {
-        flex-direction: column;
-        align-items: flex-start;
+    .input-group label {
+        width: 50%;
+        font-size: 14px;
     }
 
-    .label-input label,
-    .label-input input[type="text"] {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-
-    .label-input input[type="text"] {
-        margin-left: 0;
-        text-align: left;
-    }
-
-    .input-group input[type="range"] {
-        margin-top: 5px;
+    .input-group input[type="text"] {
+        width: 45%;
+        font-size: 14px;
     }
 
     .calculator h1 {
@@ -184,11 +137,5 @@ input[type="range"]::-ms-thumb {
 
     .calculator .result {
         font-size: 18px;
-    }
-
-    .option-button {
-        padding: 8px 12px;
-        font-size: 14px;
-        margin: 0 3px;
     }
 }

@@ -20,66 +20,49 @@ function unformatNumber(num) {
     return num.replace(/,/g, '');
 }
 
-// وظيفة لمزامنة حقل النص والمنزلق
-function syncInputs(textInput, rangeInput, isDecimal) {
-    // حدث إدخال النص
-    textInput.addEventListener('input', function(e) {
-        var value = convertArabicNumbers(this.value);
-        value = value.replace(/[^\d.]/g, '');
-
-        if (!isNaN(value) && value !== '') {
-            if (isDecimal) {
-                this.value = value;
-            } else {
-                this.value = formatNumber(value);
-            }
-            rangeInput.value = parseFloat(unformatNumber(value)) || rangeInput.min;
-        } else {
-            this.value = '';
-            rangeInput.value = rangeInput.min;
-        }
-        validateAndCalculate();
-    });
-
-    // حدث تغيير المنزلق
-    rangeInput.addEventListener('input', function(e) {
-        var value = this.value;
-        if (isDecimal) {
-            textInput.value = value;
-        } else {
-            textInput.value = formatNumber(value);
-        }
-        validateAndCalculate();
-    });
-}
-
-// تهيئة المدخلات
+// تهيئة المدخلات والمنزلقات
 window.onload = function() {
-    // المدخلات الأساسية
+    // تعريف المدخلات
     var interestRate = document.getElementById('interestRate');
     var interestRateSlider = document.getElementById('interestRateSlider');
+
     var housePrice = document.getElementById('housePrice');
     var housePriceSlider = document.getElementById('housePriceSlider');
+
     var years = document.getElementById('years');
     var yearsSlider = document.getElementById('yearsSlider');
+
     var downPayment = document.getElementById('downPayment');
     var downPaymentSlider = document.getElementById('downPaymentSlider');
 
-    // المدخلات المتقدمة
-    var otherObligations = document.getElementById('otherObligations');
-    var otherObligationsSlider = document.getElementById('otherObligationsSlider');
+    // تزامن المنزلقات مع حقول النص
+    synchronizeInputAndSlider(interestRate, interestRateSlider, formatNumber, parseFloat);
+    synchronizeInputAndSlider(housePrice, housePriceSlider, formatNumber, parseFloat);
+    synchronizeInputAndSlider(years, yearsSlider, formatNumber, parseInt);
+    synchronizeInputAndSlider(downPayment, downPaymentSlider, formatNumber, parseFloat);
 
-    // مزامنة المدخلات
-    syncInputs(interestRate, interestRateSlider, true);
-    syncInputs(housePrice, housePriceSlider, false);
-    syncInputs(years, yearsSlider, false);
-    syncInputs(downPayment, downPaymentSlider, false);
+    // إجراء الحساب الأولي
+    validateAndCalculate();
+}
 
-    if (otherObligations && otherObligationsSlider) {
-        syncInputs(otherObligations, otherObligationsSlider, false);
-    }
+// وظيفة لتزامن حقل النص مع المنزلق
+function synchronizeInputAndSlider(textInput, sliderInput, formatter, parser) {
+    // عند تغيير المنزلق
+    sliderInput.addEventListener('input', function() {
+        textInput.value = formatter(this.value);
+        validateAndCalculate();
+    });
 
-    // لن نقوم بإجراء الحساب الأولي حتى يتم إدخال القيم المطلوبة
+    // عند تغيير حقل النص
+    textInput.addEventListener('input', function() {
+        var value = unformatNumber(convertArabicNumbers(this.value));
+        if (value === '' || isNaN(parser(value))) {
+            sliderInput.value = sliderInput.min;
+        } else {
+            sliderInput.value = value;
+        }
+        validateAndCalculate();
+    });
 }
 
 // دالة للتحقق من صحة الإدخالات وتنفيذ الحساب إذا كانت الإدخالات صحيحة
@@ -106,35 +89,18 @@ function validateAndCalculate() {
     }
 }
 
-// وظيفة إظهار القسم الأساسي
-function showBasic() {
-    document.getElementById('advancedSection').style.display = 'none';
-    document.getElementById('basicButton').classList.add('active');
-    document.getElementById('advancedButton').classList.remove('active');
-    validateAndCalculate();
-}
-
-// وظيفة إظهار القسم المتقدم
-function showAdvanced() {
-    document.getElementById('advancedSection').style.display = 'block';
-    document.getElementById('basicButton').classList.remove('active');
-    document.getElementById('advancedButton').classList.add('active');
-    validateAndCalculate();
-}
-
+// وظيفة لحساب الدفعة الشهرية للرهن العقاري
 function calculateMortgage() {
     var interestRateInput = document.getElementById('interestRate').value;
     var housePriceInput = document.getElementById('housePrice').value;
     var yearsInput = document.getElementById('years').value;
     var downPaymentInput = document.getElementById('downPayment').value;
-    var otherObligationsInput = document.getElementById('otherObligations') ? document.getElementById('otherObligations').value : null;
 
     // تحويل الأرقام العربية وإزالة الفواصل
     var interestRate = parseFloat(convertArabicNumbers(interestRateInput));
     var housePrice = parseFloat(unformatNumber(convertArabicNumbers(housePriceInput)));
     var years = parseInt(convertArabicNumbers(yearsInput));
     var downPayment = downPaymentInput ? parseFloat(unformatNumber(convertArabicNumbers(downPaymentInput))) : null;
-    var otherObligations = otherObligationsInput ? parseFloat(unformatNumber(convertArabicNumbers(otherObligationsInput))) : 0;
 
     // التحقق من أن مدة الرهن لا تتجاوز 30 سنة
     if (years > 30) {
@@ -162,16 +128,11 @@ function calculateMortgage() {
     // إجمالي عدد الدفعات (بالأشهر)
     var numberOfPayments = years * 12;
 
-    // حساب الدفعة الشهرية باستخدام الصيغة القياسية
+    // حساب الدفعة الشهرية
     var monthlyPayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments) /
         (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
-    // إضافة الالتزامات الشهرية الأخرى إذا تم إدخالها وفي الوضع المتقدم
-    if (document.getElementById('advancedSection').style.display === 'block' && !isNaN(otherObligations) && otherObligations > 0) {
-        monthlyPayment += otherObligations;
-    }
-
-    // تنسيق النتيجة إلى منزلتين عشريتين وإضافة الفواصل
+    // تنسيق النتيجة
     monthlyPayment = formatNumber(monthlyPayment.toFixed(2));
 
     // عرض النتيجة
