@@ -38,6 +38,7 @@ function syncInputs(textInput, rangeInput, isDecimal) {
             this.value = '';
             rangeInput.value = rangeInput.min;
         }
+        validateAndCalculate();
     });
 
     // حدث تغيير المنزلق
@@ -48,6 +49,7 @@ function syncInputs(textInput, rangeInput, isDecimal) {
         } else {
             textInput.value = formatNumber(value);
         }
+        validateAndCalculate();
     });
 }
 
@@ -76,6 +78,32 @@ window.onload = function() {
     if (otherObligations && otherObligationsSlider) {
         syncInputs(otherObligations, otherObligationsSlider, false);
     }
+
+    // لن نقوم بإجراء الحساب الأولي حتى يتم إدخال القيم المطلوبة
+}
+
+// دالة للتحقق من صحة الإدخالات وتنفيذ الحساب إذا كانت الإدخالات صحيحة
+function validateAndCalculate() {
+    var interestRateInput = document.getElementById('interestRate').value;
+    var housePriceInput = document.getElementById('housePrice').value;
+    var yearsInput = document.getElementById('years').value;
+
+    var interestRate = parseFloat(convertArabicNumbers(interestRateInput));
+    var housePrice = parseFloat(unformatNumber(convertArabicNumbers(housePriceInput)));
+    var years = parseInt(convertArabicNumbers(yearsInput));
+
+    // التحقق من أن الإدخالات المطلوبة ليست فارغة وصحيحة
+    if (
+        !isNaN(interestRate) && interestRateInput.trim() !== '' &&
+        !isNaN(housePrice) && housePriceInput.trim() !== '' &&
+        !isNaN(years) && yearsInput.trim() !== ''
+    ) {
+        // تنفيذ الحساب
+        calculateMortgage();
+    } else {
+        // مسح النتيجة إذا كانت الإدخالات غير مكتملة أو غير صحيحة
+        document.getElementById('result').innerHTML = '';
+    }
 }
 
 // وظيفة إظهار القسم الأساسي
@@ -83,6 +111,7 @@ function showBasic() {
     document.getElementById('advancedSection').style.display = 'none';
     document.getElementById('basicButton').classList.add('active');
     document.getElementById('advancedButton').classList.remove('active');
+    validateAndCalculate();
 }
 
 // وظيفة إظهار القسم المتقدم
@@ -90,6 +119,7 @@ function showAdvanced() {
     document.getElementById('advancedSection').style.display = 'block';
     document.getElementById('basicButton').classList.remove('active');
     document.getElementById('advancedButton').classList.add('active');
+    validateAndCalculate();
 }
 
 function calculateMortgage() {
@@ -105,24 +135,6 @@ function calculateMortgage() {
     var years = parseInt(convertArabicNumbers(yearsInput));
     var downPayment = downPaymentInput ? parseFloat(unformatNumber(convertArabicNumbers(downPaymentInput))) : null;
     var otherObligations = otherObligationsInput ? parseFloat(unformatNumber(convertArabicNumbers(otherObligationsInput))) : 0;
-
-    // التحقق من صحة الإدخالات وتحديد الحقول الناقصة
-    var missingFields = [];
-    if (isNaN(interestRate) || interestRateInput.trim() === '') {
-        missingFields.push('معدل الفائدة');
-    }
-    if (isNaN(housePrice) || housePriceInput.trim() === '') {
-        missingFields.push('سعر المنزل');
-    }
-    if (isNaN(years) || yearsInput.trim() === '') {
-        missingFields.push('مدة الرهن');
-    }
-
-    if (missingFields.length > 0) {
-        var message = 'يرجى إدخال قيمة صحيحة في الحقول التالية: ' + missingFields.join(', ');
-        document.getElementById('result').innerHTML = message;
-        return;
-    }
 
     // التحقق من أن مدة الرهن لا تتجاوز 30 سنة
     if (years > 30) {

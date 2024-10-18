@@ -27,14 +27,14 @@ body {
     margin-bottom: 15px;
 }
 
-.input-row {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
+.input-group label,
+.input-group input[type="text"] {
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.input-row label {
-    flex: 0 0 40%;
+.input-group label {
+    width: 40%;
     margin-bottom: 0;
     color: #555;
     font-weight: 700;
@@ -42,8 +42,8 @@ body {
     box-sizing: border-box;
 }
 
-.input-row input[type="text"] {
-    flex: 1;
+.input-group input[type="text"] {
+    width: 55%;
     padding: 10px 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -51,30 +51,11 @@ body {
     color: #333;
     text-align: right;
     box-sizing: border-box;
-    margin-left: 10px;
 }
 
 .input-group input[type="range"] {
     width: 100%;
     margin-top: 5px;
-}
-
-.calculator button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-}
-
-.calculator button:hover {
-    background-color: #0056b3;
 }
 
 .calculator .result {
@@ -113,24 +94,19 @@ body {
 
 /* تصميم مستجيب للشاشات الصغيرة */
 @media (max-width: 480px) {
-    .input-row label {
-        flex: 0 0 35%;
-        font-size: 12px;
+    .input-group label,
+    .input-group input[type="text"] {
+        width: 100%;
+        display: block;
     }
 
-    .input-row input[type="text"] {
-        font-size: 12px;
-        margin-left: 5px;
+    .input-group input[type="text"] {
+        margin-top: 5px;
     }
 
     .calculator h1 {
         font-size: 22px;
         margin-bottom: 15px;
-    }
-
-    .calculator button {
-        padding: 10px;
-        font-size: 16px;
     }
 
     .calculator .result {
@@ -142,4 +118,67 @@ body {
         font-size: 14px;
         margin: 0 3px;
     }
+}
+
+/* إضافة بعض التنسيقات لمنزلقات النطاق لتحسين المظهر */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #007BFF;
+    border-radius: 50%;
+    margin-top: -5px;
+}
+
+input[type="range"]::-moz-range-track {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #007BFF;
+    border-radius: 50%;
+}
+
+input[type="range"]::-ms-track {
+    height: 5px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+    background: #ddd;
+    border-radius: 5px;
+}
+
+input[type="range"]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 5px;
+}
+
+input[type="range"]::-ms-thumb {
+    width: 15px;
+    height: 15px;
+    background: #007BFF;
+    border-radius: 50%;
 }
