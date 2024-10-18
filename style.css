@@ -24,22 +24,24 @@ body {
 }
 
 .input-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
+    margin-bottom: 20px;
 }
 
-.input-group label {
+.label-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label-input label {
     flex: 0 0 45%;
-    margin-bottom: 0;
     color: #555;
     font-weight: 700;
     text-align: right;
     box-sizing: border-box;
 }
 
-.input-group input[type="text"] {
+.label-input input[type="text"] {
     flex: 0 0 50%;
     padding: 8px 10px;
     border: 1px solid #ddd;
@@ -53,7 +55,7 @@ body {
 
 .input-group input[type="range"] {
     width: 100%;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .calculator .result {
@@ -155,26 +157,23 @@ input[type="range"]::-ms-thumb {
 
 /* تصميم مستجيب للشاشات الصغيرة */
 @media (max-width: 480px) {
-    .input-group {
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: center;
+    .label-input {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .input-group label {
-        flex: 0 0 45%;
-        font-size: 12px;
+    .label-input label,
+    .label-input input[type="text"] {
+        width: 100%;
+        margin-bottom: 5px;
     }
 
-    .input-group input[type="text"] {
-        flex: 0 0 50%;
-        font-size: 12px;
-        margin-left: 5px;
-        text-align: left; /* محاذاة النص إلى اليسار */
+    .label-input input[type="text"] {
+        margin-left: 0;
+        text-align: left;
     }
 
     .input-group input[type="range"] {
-        width: 100%;
         margin-top: 5px;
     }
 

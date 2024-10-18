@@ -21,40 +21,50 @@
     <!-- قسم المدخلات المشتركة -->
     <div id="inputSection">
         <div class="input-group">
-            <label for="interestRate">معدل الفائدة (% سنوياً):</label>
-            <input type="text" id="interestRate" placeholder="مثال: 3.5">
+            <div class="label-input">
+                <label for="interestRate">معدل الفائدة (% سنوياً):</label>
+                <input type="text" id="interestRate" placeholder="مثال: 3.5">
+            </div>
             <input type="range" id="interestRateSlider" min="0" max="20" step="0.1">
         </div>
 
         <div class="input-group">
-            <label for="housePrice">سعر المنزل (ريال):</label>
-            <input type="text" id="housePrice" placeholder="مثال: 300,000">
+            <div class="label-input">
+                <label for="housePrice">سعر المنزل (ريال):</label>
+                <input type="text" id="housePrice" placeholder="مثال: 300,000">
+            </div>
             <input type="range" id="housePriceSlider" min="50000" max="10000000" step="1000">
         </div>
 
         <div class="input-group">
-            <label for="years">مدة الرهن (سنوات):</label>
-            <input type="text" id="years" placeholder="مثال: 30">
+            <div class="label-input">
+                <label for="years">مدة الرهن (سنوات):</label>
+                <input type="text" id="years" placeholder="مثال: 30">
+            </div>
             <input type="range" id="yearsSlider" min="1" max="30" step="1">
         </div>
 
         <div class="input-group">
-            <label for="downPayment">الدفعة المقدمة (ريال):</label>
-            <input type="text" id="downPayment" placeholder="اتركه فارغاً إذا لم يكن لديك دفعة مقدمة">
+            <div class="label-input">
+                <label for="downPayment">الدفعة المقدمة (ريال):</label>
+                <input type="text" id="downPayment" placeholder="اتركه فارغاً إذا لم يكن لديك دفعة مقدمة">
+            </div>
             <input type="range" id="downPaymentSlider" min="0" max="1000000" step="1000">
         </div>
 
         <!-- قسم المدخلات المتقدمة -->
         <div id="advancedSection" style="display: none;">
             <div class="input-group">
-                <label for="otherObligations">الالتزامات الشهرية الأخرى (ريال):</label>
-                <input type="text" id="otherObligations" placeholder="مثال: 2,000">
+                <div class="label-input">
+                    <label for="otherObligations">الالتزامات الشهرية الأخرى (ريال):</label>
+                    <input type="text" id="otherObligations" placeholder="مثال: 2,000">
+                </div>
                 <input type="range" id="otherObligationsSlider" min="0" max="50000" step="100">
             </div>
         </div>
     </div>
 
-    <!-- تم إزالة زر الحساب -->
+    <!-- لم نعد بحاجة إلى زر الحساب لأنه يتم الحساب فورًا -->
 
     <div class="result" id="result"></div>
 </div>
