@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>حاسبة الرهن العقاري</title>
+    <title>حاسبة التمويل العقاري</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- لجعل الصفحة تستجيب لحجم شاشة الجهاز -->
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -10,31 +10,51 @@
 <body>
 
 <div class="calculator">
-    <h1>حاسبة الرهن العقاري</h1>
+    <h1>حاسبة التمويل العقاري</h1>
 
     <!-- قسم المدخلات -->
     <div id="inputSection">
         <div class="input-group">
-            <label for="interestRate">معدل الفائدة (% سنوياً):</label>
-            <input type="text" id="interestRate" placeholder="مثال: 3.5">
+            <div class="label-input-container">
+                <label for="interestRate">معدل الفائدة:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="interestRate">
+                    <span class="unit">%</span>
+                </div>
+            </div>
             <input type="range" id="interestRateSlider" min="0" max="20" step="0.1" value="0">
         </div>
 
         <div class="input-group">
-            <label for="housePrice">سعر المنزل (ريال):</label>
-            <input type="text" id="housePrice" placeholder="مثال: 300,000">
+            <div class="label-input-container">
+                <label for="housePrice">سعر المنزل:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="housePrice">
+                    <span class="unit">ريال</span>
+                </div>
+            </div>
             <input type="range" id="housePriceSlider" min="50000" max="10000000" step="1000" value="0">
         </div>
 
         <div class="input-group">
-            <label for="years">مدة الرهن (سنوات):</label>
-            <input type="text" id="years" placeholder="مثال: 30">
+            <div class="label-input-container">
+                <label for="years">مدة التمويل:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="years">
+                    <span class="unit">سنة</span>
+                </div>
+            </div>
             <input type="range" id="yearsSlider" min="1" max="30" step="1" value="0">
         </div>
 
         <div class="input-group">
-            <label for="downPayment">الدفعة المقدمة (ريال):</label>
-            <input type="text" id="downPayment">
+            <div class="label-input-container">
+                <label for="downPayment">الدفعة المقدمة:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="downPayment">
+                    <span class="unit">ريال</span>
+                </div>
+            </div>
             <input type="range" id="downPaymentSlider" min="0" max="1000000" step="1000" value="0">
         </div>
     </div>

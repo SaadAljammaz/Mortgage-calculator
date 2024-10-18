@@ -100,7 +100,19 @@ function calculateMortgage() {
     var interestRate = parseFloat(convertArabicNumbers(interestRateInput));
     var housePrice = parseFloat(unformatNumber(convertArabicNumbers(housePriceInput)));
     var years = parseInt(convertArabicNumbers(yearsInput));
-    var downPayment = downPaymentInput ? parseFloat(unformatNumber(convertArabicNumbers(downPaymentInput))) : null;
+    var downPayment = downPaymentInput ? parseFloat(unformatNumber(convertArabicNumbers(downPaymentInput))) : 0;
+
+    // التحقق من أن المدخلات أكبر من الصفر
+    if (interestRate < 0 || housePrice <= 0 || years <= 0 || downPayment < 0) {
+        document.getElementById('result').innerHTML = 'يرجى إدخال قيم صحيحة.';
+        return;
+    }
+
+    // التحقق من أن الدفعة المقدمة أقل من سعر المنزل
+    if (downPayment >= housePrice) {
+        document.getElementById('result').innerHTML = 'الدفعة المقدمة يجب أن تكون أقل من سعر المنزل.';
+        return;
+    }
 
     // التحقق من أن مدة الرهن لا تتجاوز 30 سنة
     if (years > 30) {
@@ -108,19 +120,8 @@ function calculateMortgage() {
         return;
     }
 
-    // إذا لم يتم إدخال دفعة مقدمة، اعتبارها 10٪ من سعر المنزل
-    if (downPayment === null || isNaN(downPayment)) {
-        downPayment = housePrice * 0.10;
-    }
-
     // حساب مبلغ القرض الرئيسي
     var principal = housePrice - downPayment;
-
-    // التحقق من أن مبلغ القرض ليس سلبياً
-    if (principal <= 0) {
-        document.getElementById('result').innerHTML = 'الدفعة المقدمة يجب أن تكون أقل من سعر المنزل.';
-        return;
-    }
 
     // حساب معدل الفائدة الشهري
     var monthlyInterestRate = interestRate / 100 / 12;
@@ -128,9 +129,22 @@ function calculateMortgage() {
     // إجمالي عدد الدفعات (بالأشهر)
     var numberOfPayments = years * 12;
 
-    // حساب الدفعة الشهرية
-    var monthlyPayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments) /
-        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+    var monthlyPayment;
+
+    if (interestRate === 0) {
+        // في حالة معدل الفائدة صفر
+        monthlyPayment = principal / numberOfPayments;
+    } else {
+        // حساب الدفعة الشهرية
+        var factor = Math.pow(1 + monthlyInterestRate, numberOfPayments);
+        monthlyPayment = principal * monthlyInterestRate * factor / (factor - 1);
+    }
+
+    // التحقق من أن الدفعة الشهرية رقم صالح
+    if (isNaN(monthlyPayment) || !isFinite(monthlyPayment)) {
+        document.getElementById('result').innerHTML = 'حدث خطأ في الحساب. يرجى التحقق من القيم المدخلة.';
+        return;
+    }
 
     // تنسيق النتيجة
     monthlyPayment = formatNumber(monthlyPayment.toFixed(2));
