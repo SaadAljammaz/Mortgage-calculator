@@ -25,16 +25,13 @@ body {
 
 .input-group {
     margin-bottom: 15px;
-}
-
-.input-group label,
-.input-group input[type="text"] {
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .input-group label {
-    width: 40%;
+    flex: 0 0 45%;
     margin-bottom: 0;
     color: #555;
     font-weight: 700;
@@ -43,14 +40,15 @@ body {
 }
 
 .input-group input[type="text"] {
-    width: 55%;
-    padding: 10px 12px;
+    flex: 0 0 50%;
+    padding: 8px 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
     color: #333;
-    text-align: right;
+    text-align: left; /* محاذاة النص إلى اليسار */
     box-sizing: border-box;
+    margin-left: 5px;
 }
 
 .input-group input[type="range"] {
@@ -92,35 +90,7 @@ body {
     background-color: #ddd;
 }
 
-/* تصميم مستجيب للشاشات الصغيرة */
-@media (max-width: 480px) {
-    .input-group label,
-    .input-group input[type="text"] {
-        width: 100%;
-        display: block;
-    }
-
-    .input-group input[type="text"] {
-        margin-top: 5px;
-    }
-
-    .calculator h1 {
-        font-size: 22px;
-        margin-bottom: 15px;
-    }
-
-    .calculator .result {
-        font-size: 18px;
-    }
-
-    .option-button {
-        padding: 8px 12px;
-        font-size: 14px;
-        margin: 0 3px;
-    }
-}
-
-/* إضافة بعض التنسيقات لمنزلقات النطاق لتحسين المظهر */
+/* تنسيقات منزلقات النطاق */
 input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
@@ -181,4 +151,45 @@ input[type="range"]::-ms-thumb {
     height: 15px;
     background: #007BFF;
     border-radius: 50%;
+}
+
+/* تصميم مستجيب للشاشات الصغيرة */
+@media (max-width: 480px) {
+    .input-group {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .input-group label {
+        flex: 0 0 45%;
+        font-size: 12px;
+    }
+
+    .input-group input[type="text"] {
+        flex: 0 0 50%;
+        font-size: 12px;
+        margin-left: 5px;
+        text-align: left; /* محاذاة النص إلى اليسار */
+    }
+
+    .input-group input[type="range"] {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .calculator h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .calculator .result {
+        font-size: 18px;
+    }
+
+    .option-button {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 0 3px;
+    }
 }
