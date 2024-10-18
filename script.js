@@ -20,31 +20,63 @@ function unformatNumber(num) {
     return num.replace(/,/g, '');
 }
 
-// إضافة مستمعي الأحداث لتنسيق الأرقام أثناء الإدخال وقبول الأرقام العربية
-['interestRate', 'housePrice', 'years', 'downPayment', 'otherObligations'].forEach(function(id) {
-    var input = document.getElementById(id);
-    if (input) {
-        input.addEventListener('input', function(e) {
-            // تحويل الأرقام العربية إلى إنجليزية
-            var value = convertArabicNumbers(this.value);
+// وظيفة لمزامنة حقل النص والمنزلق
+function syncInputs(textInput, rangeInput, isDecimal) {
+    // حدث إدخال النص
+    textInput.addEventListener('input', function(e) {
+        var value = convertArabicNumbers(this.value);
+        value = value.replace(/[^\d.]/g, '');
 
-            // إزالة أي أحرف غير الأرقام والنقطة العشرية
-            value = value.replace(/[^\d.]/g, '');
-
-            // تنسيق القيمة وإضافة الفواصل
-            if (!isNaN(value) && value !== '') {
-                // إذا كان الحقل هو معدل الفائدة أو مدة الرهن، لا نضيف فواصل
-                if (id === 'interestRate' || id === 'years') {
-                    this.value = value;
-                } else {
-                    this.value = formatNumber(value);
-                }
+        if (!isNaN(value) && value !== '') {
+            if (isDecimal) {
+                this.value = value;
             } else {
-                this.value = '';
+                this.value = formatNumber(value);
             }
-        });
+            rangeInput.value = parseFloat(unformatNumber(value)) || rangeInput.min;
+        } else {
+            this.value = '';
+            rangeInput.value = rangeInput.min;
+        }
+    });
+
+    // حدث تغيير المنزلق
+    rangeInput.addEventListener('input', function(e) {
+        var value = this.value;
+        if (isDecimal) {
+            textInput.value = value;
+        } else {
+            textInput.value = formatNumber(value);
+        }
+    });
+}
+
+// تهيئة المدخلات
+window.onload = function() {
+    // المدخلات الأساسية
+    var interestRate = document.getElementById('interestRate');
+    var interestRateSlider = document.getElementById('interestRateSlider');
+    var housePrice = document.getElementById('housePrice');
+    var housePriceSlider = document.getElementById('housePriceSlider');
+    var years = document.getElementById('years');
+    var yearsSlider = document.getElementById('yearsSlider');
+    var downPayment = document.getElementById('downPayment');
+    var downPaymentSlider = document.getElementById('downPaymentSlider');
+
+    // المدخلات المتقدمة
+    var otherObligations = document.getElementById('otherObligations');
+    var otherObligationsSlider = document.getElementById('otherObligationsSlider');
+
+    // مزامنة المدخلات
+    syncInputs(interestRate, interestRateSlider, true);
+    syncInputs(housePrice, housePriceSlider, false);
+    syncInputs(years, yearsSlider, false);
+    syncInputs(downPayment, downPaymentSlider, false);
+
+    if (otherObligations && otherObligationsSlider) {
+        syncInputs(otherObligations, otherObligationsSlider, false);
     }
-});
+}
 
 // وظيفة إظهار القسم الأساسي
 function showBasic() {
@@ -112,11 +144,15 @@ function calculateMortgage() {
         return;
     }
 
-    // حساب معدل الفائدة
-    var yearlyInterestRate = (interestRate / 100 * years) + 1;
+    // حساب معدل الفائدة الشهري
+    var monthlyInterestRate = interestRate / 100 / 12;
+
+    // إجمالي عدد الدفعات (بالأشهر)
+    var numberOfPayments = years * 12;
 
     // حساب الدفعة الشهرية باستخدام الصيغة القياسية
-    var monthlyPayment = principal * yearlyInterestRate / years / 12;
+    var monthlyPayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments) /
+        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
     // إضافة الالتزامات الشهرية الأخرى إذا تم إدخالها وفي الوضع المتقدم
     if (document.getElementById('advancedSection').style.display === 'block' && !isNaN(otherObligations) && otherObligations > 0) {

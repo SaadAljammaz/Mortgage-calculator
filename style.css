@@ -23,24 +23,34 @@ body {
     text-align: center;
 }
 
-.calculator label {
-    display: block;
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: inline-block;
     margin-bottom: 5px;
     color: #555;
     font-weight: 700;
     text-align: right;
+    width: 50%;
+    box-sizing: border-box;
 }
 
-.calculator input {
-    width: 100%;
+.input-group input[type="text"] {
+    width: 45%;
     padding: 10px 12px;
-    margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
     text-align: right;
     box-sizing: border-box;
+}
+
+.input-group input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
 }
 
 .calculator button {
@@ -54,6 +64,7 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .calculator button:hover {
@@ -94,7 +105,7 @@ body {
     background-color: #ddd;
 }
 
-/* إضافة قواعد لجعل التصميم متجاوبًا مع الشاشات الصغيرة */
+/* تصميم مستجيب للشاشات الصغيرة */
 @media (max-width: 480px) {
     .calculator {
         margin: 20px;
@@ -106,7 +117,12 @@ body {
         margin-bottom: 15px;
     }
 
-    .calculator input {
+    .input-group label, .input-group input[type="text"] {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .input-group input[type="text"] {
         padding: 8px 10px;
         font-size: 14px;
     }
