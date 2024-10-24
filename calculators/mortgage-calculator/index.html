@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>حاسبة التمويل العقاري</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- لجعل الصفحة تستجيب لحجم شاشة الجهاز -->
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="../../index.html">الصفحة الرئيسية</a>
+    <!-- Add links to other calculators if desired -->
+</nav>
+
+<div class="calculator">
+    <h1>حاسبة التمويل العقاري</h1>
+
+    <!-- قسم المدخلات -->
+    <div id="inputSection">
+        <div class="input-group">
+            <div class="label-input-container">
+                <label for="interestRate">معدل الفائدة:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="interestRate">
+                    <span class="unit">%</span>
+                </div>
+            </div>
+            <input type="range" id="interestRateSlider" min="0" max="20" step="0.1" value="0">
+        </div>
+
+        <div class="input-group">
+            <div class="label-input-container">
+                <label for="housePrice">سعر المنزل:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="housePrice">
+                    <span class="unit">ريال</span>
+                </div>
+            </div>
+            <input type="range" id="housePriceSlider" min="50000" max="10000000" step="1000" value="0">
+        </div>
+
+        <div class="input-group">
+            <div class="label-input-container">
+                <label for="years">مدة التمويل:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="years">
+                    <span class="unit">سنة</span>
+                </div>
+            </div>
+            <input type="range" id="yearsSlider" min="1" max="30" step="1" value="0">
+        </div>
+
+        <div class="input-group">
+            <div class="label-input-container">
+                <label for="downPayment">الدفعة المقدمة:</label>
+                <div class="input-with-unit">
+                    <input type="text" id="downPayment">
+                    <span class="unit">ريال</span>
+                </div>
+            </div>
+            <input type="range" id="downPaymentSlider" min="0" max="1000000" step="1000" value="0">
+        </div>
+    </div>
+
+    <!-- سيتم عرض النتيجة هنا -->
+    <div class="result" id="result"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

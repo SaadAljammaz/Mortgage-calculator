@@ -1,178 +1,136 @@
 body {
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
     font-family: 'Cairo', sans-serif;
     margin: 0;
     padding: 0;
-    direction: rtl;
+    background-color: #f5f5f5;
+    direction: rtl; /* Set text direction to right-to-left */
 }
 
-.calculator {
-    max-width: 400px;
-    margin: 40px auto;
+.container {
+    max-width: 960px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-sizing: border-box;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
-.calculator h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333;
     text-align: center;
 }
 
-.input-group {
+h1 {
     margin-bottom: 20px;
 }
 
-.label-input-container {
+p {
+    font-size: 18px;
+}
+
+.calculator-options {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.label-input-container label {
-    width: 40%; /* تقليل عرض التسمية */
-    color: #555;
-    font-weight: 700;
-    text-align: right;
-    box-sizing: border-box;
-}
-
-.label-input-container .input-with-unit {
-    width: 50%; /* تقليل عرض حقل الإدخال */
-    position: relative;
-    box-sizing: border-box;
-}
-
-.label-input-container .input-with-unit input[type="text"] {
-    width: 100%;
-    height: 40px; /* زيادة ارتفاع حقل الإدخال */
-    padding: 8px 10px; /* زيادة الحشوة */
-    padding-left: 40px; /* مساحة للكلمة داخل الحقل من اليسار */
-    padding-right: 10px; /* حشوة من اليمين */
-    border: 1px solid #ddd;
+.calculator-card {
+    background-color: #fff;
     border-radius: 8px;
-    font-size: 16px; /* زيادة حجم الخط */
-    color: #333;
-    text-align: right;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 300px;
+    margin: 15px;
+    padding: 20px;
     box-sizing: border-box;
-}
-
-.label-input-container .input-with-unit .unit {
-    position: absolute;
-    top: 50%;
-    left: 10px; /* ضبط الموضع على الجانب الأيسر داخل الحقل */
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #555;
-    font-size: 14px;
-}
-
-.input-group input[type="range"] {
-    width: 100%;
-    margin-top: 10px;
-    -webkit-appearance: none;
-    background: transparent;
-}
-
-.input-group input[type="range"]:focus {
-    outline: none;
-}
-
-/* تصميم المسار */
-.input-group input[type="range"]::-webkit-slider-runnable-track {
-    height: 5px;
-    background: #ddd;
-    border-radius: 5px;
-}
-
-.input-group input[type="range"]::-moz-range-track {
-    height: 5px;
-    background: #ddd;
-    border-radius: 5px;
-}
-
-.input-group input[type="range"]::-ms-track {
-    height: 5px;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-}
-
-/* تصميم المقبض */
-.input-group input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    background: #007BFF;
-    border-radius: 50%;
-    margin-top: -7.5px;
-}
-
-.input-group input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #007BFF;
-    border: none;
-    border-radius: 50%;
-}
-
-.input-group input[type="range"]::-ms-thumb {
-    width: 20px;
-    height: 20px;
-    background: #007BFF;
-    border: none;
-    border-radius: 50%;
-}
-
-.calculator .result {
-    margin-top: 20px;
-    font-size: 24px;
-    color: #333;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-/* استعلام الوسائط للشاشات الصغيرة */
-@media (max-width: 480px) {
-    .calculator {
-        padding: 15px;
+.calculator-card h2 {
+    margin-top: 0;
+}
+
+.calculator-card p {
+    color: #fff;
+    font-size: 16px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Mortgage Calculator Card Styles */
+.calculator-card.mortgage-calculator {
+    /*background: url('images/MortgageCalculator.jpg') no-repeat center center;*/
+    /*background-size: cover;*/
+    color: #fff;
+}
+
+.calculator-card.mortgage-calculator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0; /* Adjusted for RTL */
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.calculator-card.mortgage-calculator h2,
+.calculator-card.mortgage-calculator p,
+.calculator-card.mortgage-calculator .button {
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+.calculator-card.mortgage-calculator .button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.calculator-card.mortgage-calculator .button:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .calculator-options {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .calculator h1 {
-        font-size: 22px;
-        margin-bottom: 15px;
+    .calculator-card {
+        width: 90%;
     }
+}
 
-    .label-input-container label {
-        width: 38%; /* تقليل عرض التسمية أكثر */
-        font-size: 14px;
-    }
+/* Add a blurred background image to the Mortgage Calculator card */
+.calculator-card.mortgage-calculator::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url('images/MortgageCalculator.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(2px); /* Adjust the blur intensity as needed */
+    z-index: 0; /* Ensure it's behind the overlay */
+}
 
-    .label-input-container .input-with-unit {
-        width: 55%; /* تعديل عرض حقل الإدخال */
-    }
+/* Ensure the overlay remains above the blurred image */
+.calculator-card.mortgage-calculator::before {
+    z-index: 1;
+}
 
-    .label-input-container .input-with-unit input[type="text"] {
-        height: 36px; /* زيادة ارتفاع حقل الإدخال على الشاشات الصغيرة */
-        padding: 8px 10px; /* زيادة الحشوة */
-        padding-left: 35px; /* مساحة للكلمة داخل الحقل من اليسار */
-        padding-right: 8px; /* حشوة من اليمين */
-        font-size: 14px; /* زيادة حجم الخط لحقل الإدخال */
-    }
-
-    .label-input-container .input-with-unit .unit {
-        left: 8px; /* تعديل موضع الكلمة داخل الحقل */
-        font-size: 12px;
-    }
-
-    .input-group input[type="range"] {
-        margin-top: 8px;
-    }
-
-    .calculator .result {
-        font-size: 18px;
-    }
+/* Ensure the text remains above both pseudo-elements */
+.calculator-card.mortgage-calculator h2,
+.calculator-card.mortgage-calculator p,
+.calculator-card.mortgage-calculator .button {
+    z-index: 2;
 }

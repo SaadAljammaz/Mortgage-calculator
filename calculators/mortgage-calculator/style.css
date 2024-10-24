@@ -1,0 +1,194 @@
+body {
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+.calculator {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.calculator h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.label-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label-input-container label {
+    width: 40%; /* تقليل عرض التسمية */
+    color: #555;
+    font-weight: 700;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.label-input-container .input-with-unit {
+    width: 50%; /* تقليل عرض حقل الإدخال */
+    position: relative;
+    box-sizing: border-box;
+}
+
+.label-input-container .input-with-unit input[type="text"] {
+    width: 100%;
+    height: 40px; /* زيادة ارتفاع حقل الإدخال */
+    padding: 8px 10px; /* زيادة الحشوة */
+    padding-left: 40px; /* مساحة للكلمة داخل الحقل من اليسار */
+    padding-right: 10px; /* حشوة من اليمين */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px; /* زيادة حجم الخط */
+    color: #333;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.label-input-container .input-with-unit .unit {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* ضبط الموضع على الجانب الأيسر داخل الحقل */
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #555;
+    font-size: 14px;
+}
+
+.input-group input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.input-group input[type="range"]:focus {
+    outline: none;
+}
+
+/* تصميم المسار */
+.input-group input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+.input-group input[type="range"]::-moz-range-track {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+.input-group input[type="range"]::-ms-track {
+    height: 5px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+/* تصميم المقبض */
+.input-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #007BFF;
+    border-radius: 50%;
+    margin-top: -7.5px;
+}
+
+.input-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007BFF;
+    border: none;
+    border-radius: 50%;
+}
+
+.input-group input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007BFF;
+    border: none;
+    border-radius: 50%;
+}
+
+.calculator .result {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+/* استعلام الوسائط للشاشات الصغيرة */
+@media (max-width: 480px) {
+    .calculator {
+        padding: 15px;
+    }
+
+    .calculator h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .label-input-container label {
+        width: 38%; /* تقليل عرض التسمية أكثر */
+        font-size: 14px;
+    }
+
+    .label-input-container .input-with-unit {
+        width: 55%; /* تعديل عرض حقل الإدخال */
+    }
+
+    .label-input-container .input-with-unit input[type="text"] {
+        height: 36px; /* زيادة ارتفاع حقل الإدخال على الشاشات الصغيرة */
+        padding: 8px 10px; /* زيادة الحشوة */
+        padding-left: 35px; /* مساحة للكلمة داخل الحقل من اليسار */
+        padding-right: 8px; /* حشوة من اليمين */
+        font-size: 14px; /* زيادة حجم الخط لحقل الإدخال */
+    }
+
+    .label-input-container .input-with-unit .unit {
+        left: 8px; /* تعديل موضع الكلمة داخل الحقل */
+        font-size: 12px;
+    }
+
+    .input-group input[type="range"] {
+        margin-top: 8px;
+    }
+
+    .calculator .result {
+        font-size: 18px;
+    }
+}
+
+.navbar {
+    background-color: #007BFF;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
