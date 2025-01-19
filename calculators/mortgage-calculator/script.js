@@ -136,8 +136,8 @@ function calculateMortgage() {
         monthlyPayment = principal / numberOfPayments;
     } else {
         // حساب الدفعة الشهرية
-        var factor = Math.pow(1 + monthlyInterestRate, numberOfPayments);
-        monthlyPayment = principal * monthlyInterestRate * factor / (factor - 1);
+        var factor = (interestRate / 100 * years) + 1
+        monthlyPayment = principal * factor / numberOfPayments;
     }
 
     // التحقق من أن الدفعة الشهرية رقم صالح
@@ -147,8 +147,12 @@ function calculateMortgage() {
     }
 
     // تنسيق النتيجة
+    monthlyPaymentTemp = monthlyPayment;
     monthlyPayment = formatNumber(monthlyPayment.toFixed(2));
+
+    fullInterest = formatNumber((monthlyPaymentTemp * numberOfPayments - principal).toFixed(2));
 
     // عرض النتيجة
     document.getElementById('result').innerHTML = 'دفعتك الشهرية: ' + monthlyPayment + ' ريال';
+    document.getElementById('interest').innerHTML = 'إجمالي فوائد البنك: ' + fullInterest + ' ريال';
 }

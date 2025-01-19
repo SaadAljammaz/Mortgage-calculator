@@ -135,6 +135,13 @@ body {
     text-align: center;
 }
 
+.result2 {
+    margin-top: 20px;
+    font-size: 19px;
+    color: #222;
+    text-align: right;
+}
+
 /* استعلام الوسائط للشاشات الصغيرة */
 @media (max-width: 480px) {
     .calculator {
